@@ -1,0 +1,20 @@
+#!/bin/bash
+
+CONTAINER_NAME="talently"
+
+# Build Docker Image
+docker build \
+    --tag ${CONTAINER_NAME}:latest \
+    .
+
+# Run Container
+docker run \
+	--detach \
+	--interactive \
+	--tty \
+	--rm \
+	--volume $(pwd):/project \
+	--name $CONTAINER_NAME \
+	$CONTAINER_NAME
+
+docker exec $CONTAINER_NAME composer install

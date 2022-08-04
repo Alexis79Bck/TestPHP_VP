@@ -1,0 +1,6 @@
+#!/bin/bash
+
+CONTAINER_NAME="talently"
+
+# Run tests
+docker exec $CONTAINER_NAME ./vendor/kahlan/kahlan/bin/kahlan
