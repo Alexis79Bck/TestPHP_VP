@@ -20,76 +20,25 @@ class VillaPeruana
     public static function of($name, $quality, $sellIn) {
         return new static($name, $quality, $sellIn);
     }
-
-    public function tick_old()
-    {
-        if ($this->name != 'Pisco Peruano' and $this->name != 'Ticket VIP al concierto de Pick Floid') {
-            if ($this->quality > 0) {
-                if ($this->name != 'Tumi de Oro Moche') {
-                    $this->quality = $this->quality - 1;
-                }
-            }
-        } else {
-            if ($this->quality < 50) {
-                $this->quality = $this->quality + 1;
-
-                if ($this->name == 'Ticket VIP al concierto de Pick Floid') {
-                    if ($this->sellIn < 11) {
-                        if ($this->quality < 50) {
-                            $this->quality = $this->quality + 1;
-                        }
-                    }
-                    if ($this->sellIn < 6) {
-                        if ($this->quality < 50) {
-                            $this->quality = $this->quality + 1;
-                        }
-                    }
-                }
-            }
-        }
-
-        if ($this->name != 'Tumi de Oro Moche') {
-            $this->sellIn = $this->sellIn - 1;
-        }
-
-        if ($this->sellIn < 0) {
-            if ($this->name != 'Pisco Peruano') {
-                if ($this->name != 'Ticket VIP al concierto de Pick Floid') {
-                    if ($this->quality > 0) {
-                        if ($this->name != 'Tumi de Oro Moche') {
-                            $this->quality = $this->quality - 1;
-                        }
-                    }
-                } else {
-                    $this->quality = $this->quality - $this->quality;
-                }
-            } else {
-                if ($this->quality < 50) {
-                    $this->quality = $this->quality + 1;
-                }
-            }
-        }
-    }
-
+    
     public function tick()
     {
-        switch ($this->name) {
-            case 'Pisco Peruano':
-                //Si el valor de quality se encuentra entre 0 y 50 
-                if ($this->quality > 0 && $this->quality < 50) {
+        if ($this->quality > 0 && $this->quality < 50) {
+            switch ($this->name) {
+                case 'Pisco Peruano':
+                    //Si el valor de quality se encuentra entre 0 y 50 
+                    
                     if ($this->sellIn > 0) {
                         $this->quality = $this->quality + 1;
                     }else{
                         $this->quality = $this->quality == 49 ? $this->quality + 1 : $this->quality + 2;
                     }
-                }
-                //selIn disminuye en 1 
-                $this->sellIn = $this->sellIn - 1;
-                break;
+                    
+                    break;
 
-            case 'Ticket VIP al concierto de Pick Floid':
-                //Si el valor de quality se encuentra entre 0 y 50 
-                if ($this->quality > 0 && $this->quality < 50) {
+                case 'Ticket VIP al concierto de Pick Floid':
+                    //Si el valor de quality se encuentra entre 0 y 50 
+                   
                     if ($this->sellIn > 10) {
                         $this->quality = $this->quality + 1;
                     }
@@ -124,56 +73,67 @@ class VillaPeruana
                             }
                         }
                     }
-                }
-                //selIn disminuye en 1 
-                $this->sellIn = $this->sellIn - 1;
-                break;
+                   
+                
+                    break;
 
-            case 'Tumi de Oro Moche':
-                //Tomando en cuenta la premisa:
-                // - Los productos "Tumi", siendo un producto legendario, 
-                //   nunca debe ser vendido o bajaría su Quality.
-                // - Para dejarlo claro, un producto nunca puede incrementar su Quality mayor a 50, 
-                //   sin embargo "Tumi" es un producto legendario y como tal su Quality es 80 y nunca cambia.
+                case 'Tumi de Oro Moche':
+                    //Tomando en cuenta la premisa:
+                    // - Los productos "Tumi", siendo un producto legendario, 
+                    //   nunca debe ser vendido o bajaría su Quality.
+                    // - Para dejarlo claro, un producto nunca puede incrementar su Quality mayor a 50, 
+                    //   sin embargo "Tumi" es un producto legendario y como tal su Quality es 80 y nunca cambia.
 
-                // El valor de sellIn no sufren cambios, pero el quality siempre sera 80 y nunca cambia
-                //$this->quality = 80;
+                    // El valor de sellIn no sufren cambios, pero el quality siempre sera 80 y nunca cambia
+                    
+                    // Este punto tengo mis dudas, pero me basaré en lo especificado en el test
+                    
+                    //$this->quality = 80;
 
-                break;
+                    break;
 
-            case 'Café Altocusco':
-                //Tomando en cuenta la premisa:
-                // - Los productos de "Café" se degradan en Quality el doble 
-                // que los productos normales
-                if ($this->quality > 0 && $this->quality < 50) {
+                case 'Café Altocusco':
+                    //Tomando en cuenta la premisa:
+                    // - Los productos de "Café" se degradan en Quality el doble 
+                    // que los productos normales
+                   
                     if ($this->sellIn > 0) {
                         $this->quality = $this->quality - 2;
                     } else {
                         $this->quality = $this->quality - 4;
                         
                     }
-                }
-               
+                    
+                    break;
 
-                $this->sellIn = $this->sellIn - 1;
-                break;
-
-            case 'normal':
-                //Tomando en cuenta la premisa:
-                // - Al final de cada día, nuestro sistema disminuye los ambos valores para cada producto, 
-                // - Cuando la fecha de venta ha pasado, el Quality se degrada dos veces más rápido
-                if ($this->quality > 0) {
-                    if ($this->sellIn > 0) {                    
-                        $this->quality = $this->quality - 1;
-                    }else{
-                        $this->quality = $this->quality - 2;
+                case 'normal':
+                    //Tomando en cuenta la premisa:
+                    // - Al final de cada día, nuestro sistema disminuye los ambos valores para cada producto, 
+                    // - Cuando la fecha de venta ha pasado, el Quality se degrada dos veces más rápido
+                    if ($this->quality > 0) {
+                        if ($this->sellIn > 0) {                    
+                            $this->quality = $this->quality - 1;
+                        }else{
+                            $this->quality = $this->quality - 2;
+                        }
                     }
-                }
-                $this->sellIn = $this->sellIn - 1;
-                break;
+                    
+                    break;
+            }
         }
+        //selIn disminuye en 1 
+        //$this->sellIn = $this->sellIn - 1;
+        
+        $this->sellIn = decreaseSellIn($this->name, $this->sellIn);
     }
         
+}
+
+function decreaseSellIn($name, $sellIn) {
+    if ($name != 'Tumi de Oro Moche')
+        return $sellIn = $sellIn - 1;
+    else
+        return $sellIn;
 }
 
 
