@@ -54,6 +54,28 @@ Para dejarlo claro, un producto nunca puede incrementar su Quality mayor a 50, s
 # Preguntas de conocimiento en Laravel
 
 1. Qué paquete o estrategia utilizarías para levantar un sistema de administración rápidamente? (Autenticación y CRUDs)
+    * R: Existe varias dependencias, unas que pueden ser instalada conjuntamente con un nuevo proyecto
+         de laravel, otras se instalan como dependecias adicionales. Para mi la mejor opción es utilizar 
+         Laravel Breeze con Blade, ya que viene por defecto. Ahora si se desea usar un Legacy de Bootstrap,
+         se puede utilizar la dependencia de Laravel/ui con el stack de bootstrap.
+
 2. Una breve explicación de cómo laravel utiliza la injección de dependencias
+    * R: La inyección de dependencias es el encargado de instanciar las clases que necesitemos
+         y suministrarnos ("inyectar") las dependencias enviando los parámetros oportunos al constructor.
+         Cumple con uno de los pricipios S.O.L.I.D, el cual hace referencia a la Inversión de Dependencias 
+         (DI) y evita la dependencia rígida enter componentes.
+
 3. En qué casos utilizarías un Query Scope?
+    * R: La utilización de un Query Scope dependerá del alcance que se desea en la consulta, ya que 
+         Laravel puede implementar 2 tipos de Query Scope, local y global. 
+         Si utilizamos un Query Scope Global, permitiría que una consulta pueda ser aplicada cualquier
+         modelo que se le necesite. En cambio el Query Scope Local, se crea como método dentro del model que lo requiere.
+
 4. Qué convenciones utilizas en la creación e implementación de migraciones?
+    * R: De acuerdo con las convenciones PSR para programación en PHP, laravel utiliza por
+         defecto dichas convenciones. Por ejemplo al utilizar el comando: php artisan make:migration 
+         create_nombreTablaPlural_table, éste creará el archivo en la carpeta database/migrations, con la 
+         estructura <timestamps_create_nombreTablaPlural_table>. Ahora si se desea crear a partir de un 
+         modelo, usando el comando php artisan make:model nombreModeloSingular -m, como opción para que 
+         automaticamente genere la migracion correspondiente a dicho modelo.
+         
