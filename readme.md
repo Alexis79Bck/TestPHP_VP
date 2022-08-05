@@ -63,7 +63,7 @@ Para dejarlo claro, un producto nunca puede incrementar su Quality mayor a 50, s
     * R: La inyección de dependencias es el encargado de instanciar las clases que necesitemos
          y suministrarnos ("inyectar") las dependencias enviando los parámetros oportunos al constructor.
          Cumple con uno de los pricipios S.O.L.I.D, el cual hace referencia a la Inversión de Dependencias 
-         (DI) y evita la dependencia rígida enter componentes.
+         (DI) y evita la dependencia rígida entre componentes.
 
 3. En qué casos utilizarías un Query Scope?
     * R: La utilización de un Query Scope dependerá del alcance que se desea en la consulta, ya que 
@@ -76,6 +76,6 @@ Para dejarlo claro, un producto nunca puede incrementar su Quality mayor a 50, s
          defecto dichas convenciones. Por ejemplo al utilizar el comando: php artisan make:migration 
          create_nombreTablaPlural_table, éste creará el archivo en la carpeta database/migrations, con la 
          estructura <timestamps_create_nombreTablaPlural_table>. Ahora si se desea crear a partir de un 
-         modelo, usando el comando php artisan make:model nombreModeloSingular -m, como opción para que 
-         automaticamente genere la migracion correspondiente a dicho modelo.
+         modelo, usando el comando: php artisan make:model nombreModeloSingular -m, como opción para que 
+         automáticamente genere la migración correspondiente a dicho modelo.
          
